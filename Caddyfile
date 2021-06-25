@@ -1,0 +1,33 @@
+localhost {
+        encode zstd gzip
+        templates
+        file_server browse
+}
+
+http://site1.com {
+        root * /var/www/virusguides_static
+        file_server
+}
+
+http://site2.com {
+        root * /var/www/virusresearch_static
+        file_server
+}
+
+http://site3.com {
+        root * /var/www/threatonmac_static
+        file_server
+}
+
+
+http://virusguides.com {
+	reverse_proxy wordpress_vg:80
+}
+
+http://virusresearch.org {
+	reverse_proxy wordpress_vr:80
+}
+
+http://threatonmac.com {
+	reverse_proxy wordpress_tm:80
+}
