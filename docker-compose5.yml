@@ -14,40 +14,40 @@ services:
       - db_data:/var/lib/mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD=vg2021password
-      MYSQL_DATABASE=wordpressDB
-      MYSQL_USER=wordpress
-      MYSQL_PASSWORD=vg2021password
+      - MYSQL_ROOT_PASSWORD=vg2021password
+      - MYSQL_DATABASE=wordpressDB
+      - MYSQL_USER=wordpress
+      - MYSQL_PASSWORD=vg2021password
   dbvr:
     image: mysql:5.7
     volumes:
       - db_data:/var/lib/mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD=vr2021password
-      MYSQL_DATABASE=wordpressDB
-      MYSQL_USER=wordpress
-      MYSQL_PASSWORD=vr2021password
+      - MYSQL_ROOT_PASSWORD=vr2021password
+      - MYSQL_DATABASE=wordpressDB
+      - MYSQL_USER=wordpress
+      - MYSQL_PASSWORD=vr2021password
   dbtm:
     image: mysql:5.7
     volumes:
       - db_data:/var/lib/mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD=tm2021password
-      MYSQL_DATABASE=wordpressDB
-      MYSQL_USER=wordpress
-      MYSQL_PASSWORD=tm2021password
+      - MYSQL_ROOT_PASSWORD=tm2021password
+      - MYSQL_DATABASE=wordpressDB
+      - MYSQL_USER=wordpress
+      - MYSQL_PASSWORD=tm2021password
   wordpressvg:
     depends_on:
       - dbvg
     image: wordpress:5.7
     restart: always
     environment:
-      WORDPRESS_DB_HOST=db:3306
-      WORDPRESS_DB_USER=wordpress
-      WORDPRESS_DB_PASSWORD=vg2021password
-      WORDPRESS_DB_NAME=wordpressDB
+      - WORDPRESS_DB_HOST=db:3306
+      - WORDPRESS_DB_USER=wordpress
+      - WORDPRESS_DB_PASSWORD=vg2021password
+      - WORDPRESS_DB_NAME=wordpressDB
     volumes:
       - ./wp-content:/var/www/html/wp-content   
   wordpressvr:
@@ -56,10 +56,10 @@ services:
     image: wordpress:5.7
     restart: always
     environment:
-      WORDPRESS_DB_HOST=db:3306
-      WORDPRESS_DB_USER=wordpress
-      WORDPRESS_DB_PASSWORD=vr2021password
-      WORDPRESS_DB_NAME=wordpressDB
+      - WORDPRESS_DB_HOST=db:3306
+      - WORDPRESS_DB_USER=wordpress
+      - WORDPRESS_DB_PASSWORD=vr2021password
+      - WORDPRESS_DB_NAME=wordpressDB
     volumes:
       - ./wp-content:/var/www/html/wp-content   
   wordpresstm:
@@ -68,10 +68,10 @@ services:
     image: wordpress:5.7
     restart: always
     environment:
-      WORDPRESS_DB_HOST=db:3306
-      WORDPRESS_DB_USER=wordpress
-      WORDPRESS_DB_PASSWORD=tm2021password
-      WORDPRESS_DB_NAME=wordpressDB
+      - WORDPRESS_DB_HOST=db:3306
+      - WORDPRESS_DB_USER=wordpress
+      - WORDPRESS_DB_PASSWORD=tm2021password
+      - WORDPRESS_DB_NAME=wordpressDB
     volumes:
       - ./wp-content:/var/www/html/wp-content         
 volumes:
