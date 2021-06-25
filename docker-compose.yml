@@ -1,0 +1,67 @@
+version: "3.9"
+
+services:
+  caddy:
+    image: coloradostark/caddy-ssl-multisite:0.22
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./www-data:/var/www
+ db_vg:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    env_file:
+      - db-variables-vg.env
+ db_vr:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    env_file:
+      - db-variables-vr.env
+  db_tm:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    env_file:
+      - db-variables-tm.env     
+  wordpress_vg:
+    depends_on:
+      - db_vg
+    image: wordpress:5.7
+    restart: always
+    env_file:
+      - wp-variables-vg.env
+    volumes:
+      - ./wp-content:/var/www/html/wp-content   
+ wordpress_vr:
+    depends_on:
+      - db_vr
+    image: wordpress:5.7
+    restart: always
+    env_file:
+      - wp-variables-vr.env
+    volumes:
+      - ./wp-content:/var/www/html/wp-content   
+wordpress_tm:
+    depends_on:
+      - db_tm
+    image: wordpress:5.7
+    restart: always
+    env_file:
+      - wp-variables-tm.env
+    volumes:
+      - ./wp-content:/var/www/html/wp-content         
+volumes:
+  www-data:
+    driver: local
+    driver_opts:
+      type: "none"
+      o: "bind"
+      device: "./www-data"
+      
+  db_data: {}
