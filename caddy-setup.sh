@@ -14,17 +14,17 @@ wget https://raw.githubusercontent.com/daniel-stoyanov/caddy-wordpress-multi/mai
 
 wget https://github.com/daniel-stoyanov/caddy-wordpress-multi/raw/main/websites.tar
 
-wget https://raw.githubusercontent.com/daniel-stoyanov/caddy-wordpress-multi/main/db-variables-tm.env
+wget https://raw.githubusercontent.com/daniel-stoyanov/caddy-wordpress-multi/main/db-variablestm.env
 
-wget https://raw.githubusercontent.com/daniel-stoyanov/caddy-wordpress-multi/main/db-variables-vg.env
+wget https://raw.githubusercontent.com/daniel-stoyanov/caddy-wordpress-multi/main/db-variablesvg.env
 
-wget https://raw.githubusercontent.com/daniel-stoyanov/caddy-wordpress-multi/main/db-variables-vr.env
+wget https://raw.githubusercontent.com/daniel-stoyanov/caddy-wordpress-multi/main/db-variablesvr.env
 
-wget https://raw.githubusercontent.com/daniel-stoyanov/caddy-wordpress-multi/main/wp-variables-tm.env
+wget https://raw.githubusercontent.com/daniel-stoyanov/caddy-wordpress-multi/main/wp-variablestm.env
 
-wget https://raw.githubusercontent.com/daniel-stoyanov/caddy-wordpress-multi/main/wp-variables-vr.env
+wget https://raw.githubusercontent.com/daniel-stoyanov/caddy-wordpress-multi/main/wp-variablesvr.env
 
-wget https://raw.githubusercontent.com/daniel-stoyanov/caddy-wordpress-multi/main/wp-variables-vg.env
+wget https://raw.githubusercontent.com/daniel-stoyanov/caddy-wordpress-multi/main/wp-variablesvg.env
 
 tar -xvf websites.tar
 
