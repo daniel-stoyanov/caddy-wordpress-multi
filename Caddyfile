@@ -21,13 +21,13 @@ http://site3.com {
 
 
 http://virusguides.com {
-	reverse_proxy wordpress_vg:80
+	reverse_proxy wordpressvg:80
 }
 
 http://virusresearch.org {
-	reverse_proxy wordpress_vr:80
+	reverse_proxy wordpressvr:80
 }
 
 http://threatonmac.com {
-	reverse_proxy wordpress_tm:80
+	reverse_proxy wordpresstm:80
 }
