@@ -64,4 +64,6 @@ volumes:
       o: "bind"
       device: "./www-data"
       
-  db_data: {}
+  db_data_vg: {}
+  db_data_vr: {}
+  db_data_tm: {}
