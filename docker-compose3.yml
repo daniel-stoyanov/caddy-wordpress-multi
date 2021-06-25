@@ -40,7 +40,7 @@ services:
       - ./wp-content:/var/www/html/wp-content   
   wordpressvr:
     dependson:
-      - db_vr
+      - dbvr
     image: wordpress:5.7
     restart: always
     env_file:
