@@ -11,21 +11,21 @@ services:
   dbvg:
     image: mysql:5.7
     volumes:
-      - db_data:/var/lib/mysql
+      - db_data_vg:/var/lib/mysql
     restart: always
     env_file:
       - db-variablesvg.env
   dbvr:
     image: mysql:5.7
     volumes:
-      - db_data:/var/lib/mysql
+      - db_data_vr:/var/lib/mysql
     restart: always
     env_file:
       - db-variablesvr.env
   dbtm:
     image: mysql:5.7
     volumes:
-      - db_data:/var/lib/mysql
+      - db_data_tm:/var/lib/mysql
     restart: always
     env_file:
       - db-variablestm.env     
@@ -37,7 +37,7 @@ services:
     env_file:
       - wp-variablesvg.env
     volumes:
-      - ./wp-content:/var/www/html/wp-content   
+      - ./wp-content:/var/www/html/wp-content-vg 
   wordpressvr:
     depends_on:
       - dbvr
@@ -46,7 +46,7 @@ services:
     env_file:
       - wp-variablesvr.env
     volumes:
-      - ./wp-content:/var/www/html/wp-content   
+      - ./wp-content:/var/www/html/wp-content-vr
   wordpresstm:
     depends_on:
       - dbtm
@@ -55,7 +55,7 @@ services:
     env_file:
       - wp-variablestm.env
     volumes:
-      - ./wp-content:/var/www/html/wp-content         
+      - ./wp-content:/var/www/html/wp-content-tm      
 volumes:
   www-data:
     driver: local
