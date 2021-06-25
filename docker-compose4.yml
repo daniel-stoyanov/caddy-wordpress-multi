@@ -1,0 +1,88 @@
+version: "3.9"
+
+services:
+  caddy:
+    image: coloradostark/caddy-ssl-multisite:0.22
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./www-data:/var/www
+  php-server:
+    image: php:7.4.13-fpm-alpine
+    restart: always
+    volumes:
+      - www-data:/var/www
+  node-server:
+    image: node:14.15.3-alpine3.12
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - node-app:/home/node/app
+    expose:
+      - "8080"
+    command: "npm start"
+  dbvr:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    env_file:
+      - db-variablesvr.env
+  dbvg:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    env_file:
+      - db-variablesvg.env
+  dbtm:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    env_file:
+      - db-variablestm.env
+  wordpressvr:
+    depends_on:
+      - dbvr
+    image: wordpress:5.7
+    restart: always
+    env_file:
+      - wp-variablesvr.env
+    volumes:
+      - ./wp-content:/var/www/html/wp-content     
+  wordpressvg:
+    depends_on:
+      - dbvg
+    image: wordpress:5.7
+    restart: always
+    env_file:
+      - wp-variablesvg.env
+    volumes:
+      - ./wp-content:/var/www/html/wp-content
+  wordpresstm:
+    depends_on:
+      - dbtm
+    image: wordpress:5.7
+    restart: always
+    env_file:
+      - wp-variablestm.env
+    volumes:
+      - ./wp-content:/var/www/html/wp-content 
+volumes:
+  www-data:
+    driver: local
+    driver_opts:
+      type: "none"
+      o: "bind"
+      device: "./www-data"
+  node-app:
+    driver: local
+    driver_opts:
+      type: "none"
+      o: "bind"
+      device: "./node-app"
+  db_data: {}
