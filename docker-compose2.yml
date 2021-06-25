@@ -29,7 +29,7 @@ services:
     restart: always
     env_file:
       - db-variablestm.env     
-  wordpress_vg:
+  wordpressvg:
     depends_on:
       - db_vg
     image: wordpress:5.7
@@ -38,7 +38,7 @@ services:
       - wp-variablesvg.env
     volumes:
       - ./wp-content:/var/www/html/wp-content   
-  wordpress_vr:
+  wordpressvr:
     depends_on:
       - db_vr
     image: wordpress:5.7
@@ -47,7 +47,7 @@ services:
       - wp-variablesvr.env
     volumes:
       - ./wp-content:/var/www/html/wp-content   
-wordpress_tm:
+wordpresstm:
     depends_on:
       - db_tm
     image: wordpress:5.7
