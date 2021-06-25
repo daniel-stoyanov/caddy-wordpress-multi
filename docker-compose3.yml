@@ -39,7 +39,7 @@ services:
     volumes:
       - ./wp-content:/var/www/html/wp-content   
   wordpressvr:
-    dependson:
+    depends_on:
       - dbvr
     image: wordpress:5.7
     restart: always
