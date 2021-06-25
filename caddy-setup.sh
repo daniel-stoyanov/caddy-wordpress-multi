@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# Elevate Permissions for Ubuntu user 
-sudo usermod -aG docker ubuntu
-
-# Install Docker Machine
-chmod +x /usr/local/bin/docker-machine
-
 mkdir caddy
 
 cd caddy
