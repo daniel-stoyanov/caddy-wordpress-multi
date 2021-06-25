@@ -1,14 +1,69 @@
-version: '2'
-
-# same as 
-# docker run -p 80:4000 -v $(pwd):/site bretfisher/jekyll-serve
+version: "3.9"
 
 services:
-  jekyll:
-    image: bretfisher/jekyll-serve
-    volumes:
-      - .:/site
+  caddy:
+    image: coloradostark/caddy-ssl-multisite:0.22
     ports:
-      - '80:4000'
-
-
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./www-data:/var/www
+  dbvg:
+    image: mysql:5.7
+    volumes:
+      - db_data_vg:/var/lib/mysql
+    restart: always
+    env_file:
+      - db-variablesvg.env
+  dbvr:
+    image: mysql:5.7
+    volumes:
+      - db_data_vr:/var/lib/mysql
+    restart: always
+    env_file:
+      - db-variablesvr.env
+  dbtm:
+    image: mysql:5.7
+    volumes:
+      - db_data_tm:/var/lib/mysql
+    restart: always
+    env_file:
+      - db-variablestm.env     
+  wordpressvg:
+    depends_on:
+      - dbvg
+    image: wordpress:5.7
+    restart: always
+    env_file:
+      - wp-variablesvg.env
+    volumes:
+      - ./wp-content:/var/www/html/wp-content-vg 
+  wordpressvr:
+    depends_on:
+      - dbvr
+    image: wordpress:5.7
+    restart: always
+    env_file:
+      - wp-variablesvr.env
+    volumes:
+      - ./wp-content:/var/www/html/wp-content-vr
+  wordpresstm:
+    depends_on:
+      - dbtm
+    image: wordpress:5.7
+    restart: always
+    env_file:
+      - wp-variablestm.env
+    volumes:
+      - ./wp-content:/var/www/html/wp-content-tm      
+volumes:
+  www-data:
+    driver: local
+    driver_opts:
+      type: "none"
+      o: "bind"
+      device: "./www-data"
+      
+  db_data_vg: {}
+  db_data_vr: {}
+  db_data_tm: {}
